@@ -5,11 +5,12 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-if (!process.env.PRIVY_APP_ID) {
+console.log(process.env.NEXT_PUBLIC_PRIVY_APP_ID);
+if (!process.env.NEXT_PUBLIC_PRIVY_APP_ID) {
   throw new Error("PRIVY_APP_ID is not set");
 }
 
-const appId = process.env.PRIVY_APP_ID;
+const appId = process.env.NEXT_PUBLIC_PRIVY_APP_ID;
 
 export default function PrivyAuthProvider({
   children,
@@ -26,9 +27,20 @@ export default function PrivyAuthProvider({
           accentColor: "#676FFF",
           logo: "https://your-logo-url",
         },
+        fundingMethodConfig: {
+          moonpay: {
+            paymentMethod: "credit_debit_card", // Purchase with credit or debit card
+            uiConfig: { accentColor: "#696FFD", theme: "light" }, // Styling preferences for MoonPay's UIs
+          },
+        },
         // Create embedded wallets for users who don't have a wallet
         embeddedWallets: {
-          createOnLogin: "users-without-wallets",
+          createOnLogin: "users-without-wallets", // Ensures wallets are created if the user doesn't have one
+        },
+        externalWallets: {
+          coinbaseWallet: {
+            connectionOptions: "smartWalletOnly",
+          },
         },
       }}
     >

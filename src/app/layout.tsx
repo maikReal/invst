@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import PrivyAuthProvider from "@/components/auth/PrivyAuth";
-
-import { ChakraProvider, defaultSystem } from "@chakra-ui/react";
+import PrivyAuthProvider from "@/components/privy-auth/PrivyProvider";
+import { OnchainkitProvider } from "@/components/onchain-kit/OnchainKitProvider";
+// import { ChakraProvider, defaultSystem } from "@chakra-ui/react";
+import { Provider } from "@/components/ui/provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,11 +27,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html suppressHydrationWarning lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <ChakraProvider value={defaultSystem}>
-          <PrivyAuthProvider>{children}</PrivyAuthProvider>
-        </ChakraProvider>
+        <PrivyAuthProvider>
+          <Provider>
+            <OnchainkitProvider>{children}</OnchainkitProvider>
+          </Provider>
+        </PrivyAuthProvider>
       </body>
     </html>
   );
