@@ -1,0 +1,40 @@
+{
+  "name": "invst-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/server.js",
+  "exports": {
+    "import": "./dist/server.js",
+    "require": "./dist/server.cjs"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "tsup api/server.ts --dts --format cjs,esm --out-dir dist",
+    "start": "bun dist/server.js",
+    "dev": "bun api/server.ts",
+    "watch": "bunx tsup api/server.ts --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.12.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "@lit-protocol/encryption": "^7.0.6",
+    "@lit-protocol/lit-node-client": "^7.0.6",
+    "@lit-protocol/lit-node-client-nodejs": "^7.0.6",
+    "@msgpack/msgpack": "^3.0.0",
+    "@types/cors": "^2.8.17",
+    "@types/dotenv": "^6.1.1",
+    "@types/express": "^5.0.0",
+    "@virtuals-protocol/game": "^0.1.7",
+    "@virtuals-protocol/game-telegram-plugin": "^0.1.4",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "sqlite": "^5.1.1"
+  }
+}

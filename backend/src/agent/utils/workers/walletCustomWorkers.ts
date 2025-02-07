@@ -1,0 +1,10 @@
+import { GameWorker } from "@virtuals-protocol/game";
+import { createOrRetreiveWalletFunction } from "src/agent/utils/functions/walletCustomFunctions";
+
+export const createOrRetreiveWalletWorker = new GameWorker({
+  id: "create_or_retreive_wallet",
+  name: "Create or retreive wallet",
+  description:
+    "Create or retreive a wallet based on a user hashed email to use for on-chain operations",
+  functions: [createOrRetreiveWalletFunction],
+});
