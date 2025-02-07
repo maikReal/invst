@@ -56,7 +56,8 @@ build/Release
 
 # Dependency directories
 
-node_modules/
+node_modules
+.next
 jspm_packages/
 
 # Snowpack dependency directory (https://snowpack.dev/)
@@ -173,5 +174,3 @@ dist
 
 # Finder (MacOS) folder config
 .DS_Store
-
-./database/*.db

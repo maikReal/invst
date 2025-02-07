@@ -43,3 +43,9 @@ next-env.d.ts
 .turbo
 
 package-lock.json
+
+node_modules
+ui/.next
+ui/node_modules
+ui/.turbo
+ui/package-lock.json
