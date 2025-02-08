@@ -1,19 +1,19 @@
 import { Agent } from "src/orchestrator/agent";
 
-export const executeTaskByWorkerId = async (req: any, res: any) => {
+export const executeTaskByRequest = async (req: any, res: any) => {
   const { workerId } = req.params;
-  const { userHashedEmail } = req.body;
+  const { task } = req.body;
   const agentInstance = Agent.getInstance();
-  if (!userHashedEmail) {
-    return res.status(400).json({ error: "Hashed email is required" });
+  if (!task) {
+    return res.status(400).json({ error: "Task is required" });
   }
 
-  console.log("Input params: ", { workerId, userHashedEmail });
+  console.log("Input params: ", { workerId, task });
 
   try {
-    const task = `Run the ${workerId} work with following input data: ${JSON.stringify(
-      { userHashedEmail }
-    )}`;
+    // const task = `Run the ${workerId} work with following input data: ${JSON.stringify(
+    //   { userHashedEmail }
+    // )}`;
 
     console.log("Worker task: ", task);
 

@@ -2,9 +2,9 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 
-import { Agent } from "src/agent/agent";
+import { Agent } from "src/orchestrator/agent";
 import { agentHealthCheck } from "api/routes/agent/health";
-import { executeStrategy } from "api/routes/agent/executeStrategy";
+import { executeTaskByRequest } from "api/routes/agent/executeTaskByRequest";
 import { executeTaskByWorkerId } from "./routes/agent/executeTaskByWorkerId";
 dotenv.config();
 
@@ -33,7 +33,7 @@ app.get("/", (req: any, res: any) => {
 
 app.get("/api/agent/health", agentHealthCheck);
 
-app.post("/api/agent/execute-strategy", executeStrategy);
+app.post("/api/agent/ask-request/:workerId", executeTaskByRequest);
 
 app.post("/api/agent/worker/:workerId", executeTaskByWorkerId);
 

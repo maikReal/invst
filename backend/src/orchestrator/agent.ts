@@ -1,8 +1,8 @@
 import { GameAgent } from "@virtuals-protocol/game";
-import { analyzeAndBuyTokensWorker } from "../customWorkers";
 import TelegramPlugin from "@virtuals-protocol/game-telegram-plugin";
 import dotenv from "dotenv";
-import { createOrRetreiveWalletWorker } from "./utils/workers/walletCustomWorkers";
+import { createOrRetreiveWalletWorker } from "./settings/workers/DelegateWalletCreation";
+import { balancerWorker } from "./settings/workers/DelegateBalancerTasks";
 dotenv.config();
 
 export class Agent {
@@ -109,7 +109,7 @@ Your communication style reflects your precision, expertise, and accessibility:
 - Don't ask for confirmation or wait for a response too often`,
       getAgentState: this.getAgentState,
       workers: [
-        analyzeAndBuyTokensWorker,
+        balancerWorker,
         createOrRetreiveWalletWorker,
         this.telegramPlugin.getWorker({
           // Define the functions that the worker can perform, by default it will use the all functions defined in the plugin
@@ -174,8 +174,8 @@ Your communication style reflects your precision, expertise, and accessibility:
           .join(", ")}`
       );
       console.log(
-        `🔎 Checking worker functions:`,
-        analyzeAndBuyTokensWorker.functions.map((f) => f.name)
+        `🔎 Checking worker functions for balancerWorker:`,
+        balancerWorker.functions.map((f) => f.name)
       );
 
       console.log(`🕒 Running agent every ${interval} seconds...`);
@@ -186,21 +186,21 @@ Your communication style reflects your precision, expertise, and accessibility:
   }
 
   // Function to execute a specific strategy
-  public async executeStrategy(strategyName: string) {
-    try {
-      const worker = this.agent.getWorkerById(strategyName);
-      if (worker) {
-        console.log(`⚡ Executing strategy: ${strategyName}`);
-        await worker.runTask(`Execute the ${strategyName} strategy`, {
-          verbose: true,
-        });
-      } else {
-        console.log(`❌ Worker for strategy '${strategyName}' not found.`);
-      }
-    } catch (error) {
-      console.error(`❌ Error executing strategy '${strategyName}':`, error);
-    }
-  }
+  // public async executeStrategy(strategyName: string) {
+  //   try {
+  //     const worker = this.agent.getWorkerById(strategyName);
+  //     if (worker) {
+  //       console.log(`⚡ Executing strategy: ${strategyName}`);
+  //       await worker.runTask(`Execute the ${strategyName} strategy`, {
+  //         verbose: true,
+  //       });
+  //     } else {
+  //       console.log(`❌ Worker for strategy '${strategyName}' not found.`);
+  //     }
+  //   } catch (error) {
+  //     console.error(`❌ Error executing strategy '${strategyName}':`, error);
+  //   }
+  // }
 
   public getAgent() {
     return this.agent;
@@ -216,8 +216,8 @@ Your communication style reflects your precision, expertise, and accessibility:
       );
 
       console.log(
-        `🔎 Checking worker functions:`,
-        analyzeAndBuyTokensWorker.functions.map((f) => f.name)
+        `🔎 Checking worker functions for balancerWorker:`,
+        balancerWorker.functions.map((f) => f.name)
       );
 
       // Example of running the agent with a fixed interval

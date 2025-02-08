@@ -11,7 +11,8 @@ import dotenv from "dotenv";
 import {
   PrivateLitStorageService,
   UserWalletData,
-} from "src/wallet/PrivateStorageManager";
+} from "src/executor/PrivateStorageManager";
+import { manageBalancerLiquidityProvider } from "./custom-actions/BalancerProviders";
 dotenv.config();
 
 class AgentKitService {
@@ -73,6 +74,9 @@ class AgentKitService {
       this.agentKit = await AgentKit.from({
         walletProvider: this.walletProvider!,
         actionProviders: [
+          // Custom providers
+          manageBalancerLiquidityProvider,
+
           walletActionProvider(),
           erc20ActionProvider(),
           cdpApiActionProvider({
@@ -109,6 +113,27 @@ class AgentKitService {
 
   public getAgentKitInstance(): AgentKit {
     return this.agentKit;
+  }
+
+  public async askRequest(args: any) {
+    console.log(`🔹 Retreiveing all agent actions...`);
+    const actions = this.agentKit.getActions();
+
+    console.log(`🔹 Found ${actions.length} actions`);
+
+    const balancerLiquidityAction = actions.find((action) => {
+      console.log(`🔹 Action name: ${action.name}`);
+      return action.name === "CustomActionProvider_manage_balancer_liquidity";
+    });
+
+    console.log(
+      `🔹 Balancer liquidity action found: ${balancerLiquidityAction}`
+    );
+    const result = await balancerLiquidityAction?.invoke(args);
+
+    console.log(`🔹 Agent processed the request. Pools output: ${result}`);
+
+    return result;
   }
 }
 

@@ -4,7 +4,7 @@ import {
   ExecutableGameFunctionStatus,
   ExecutableGameFunctionResponse,
 } from "@virtuals-protocol/game";
-import AgentKitService from "src/wallet/AgentKitService";
+import AgentKitService from "src/executor/AgentKitService";
 
 /**
  * Createa an agent wallet per user
