@@ -34,7 +34,9 @@ export default function PrivyAuthProvider({
         // },
         // Create embedded wallets for users who don't have a wallet
         embeddedWallets: {
-          createOnLogin: "all-users", // Ensures wallets are created if the user doesn't have one
+          ethereum: {
+            createOnLogin: "all-users", // Ensures wallets are created if the user doesn't have one
+          },
         },
         externalWallets: {
           coinbaseWallet: {

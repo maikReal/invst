@@ -8,6 +8,7 @@ export default function AuthLayout({
   return (
     <Flex
       flexDir={"column"}
+      h={"100vh"}
       justifyContent={"center"}
       alignItems={"center"}
       flex={1}

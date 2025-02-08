@@ -1,21 +1,21 @@
 {
   "name": "investment-project",
-  "private": true,
   "version": "0.1.0",
-  "packageManager": "bun@1.1.45",
-  "workspaces": [
-    "ui",
-    "backend"
-  ],
+  "devDependencies": {
+    "turbo": "^2.4.0"
+  },
   "engines": {
     "bun": "latest"
   },
+  "packageManager": "bun@1.1.45",
+  "private": true,
   "scripts": {
     "dev": "bun run turbo dev",
     "build": "bun run turbo build",
     "start": "bun run turbo start"
   },
-  "devDependencies": {
-    "turbo": "^2.4.0"
-  }
+  "workspaces": [
+    "ui",
+    "backend"
+  ]
 }
