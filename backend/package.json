@@ -23,14 +23,12 @@
     "typescript": "^5.7.3"
   },
   "dependencies": {
-    "@balancer/sdk": "^2.1.0",
-    "@goat-sdk/core": "^0.4.7",
+    "@coinbase/agentkit": "^0.1.2",
     "@lit-protocol/auth-helpers": "^7.0.6",
     "@lit-protocol/constants": "^7.0.6",
     "@lit-protocol/encryption": "^7.0.6",
     "@lit-protocol/lit-node-client": "^7.0.6",
     "@lit-protocol/lit-node-client-nodejs": "^7.0.6",
-    "@msgpack/msgpack": "^3.0.0",
     "@types/cors": "^2.8.17",
     "@types/dotenv": "^6.1.1",
     "@types/express": "^5.0.0",
