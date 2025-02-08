@@ -1,4 +1,4 @@
-import { ChakraProvider, defaultSystem, Flex } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 
 export default function DashboardLayout({
   children,
@@ -7,8 +7,9 @@ export default function DashboardLayout({
 }) {
   return (
     <Flex
+      h={"100vh"}
       flexDir={"column"}
-      justifyContent={"center"}
+      justifyContent={"start"}
       alignItems={"center"}
       flex={1}
     >

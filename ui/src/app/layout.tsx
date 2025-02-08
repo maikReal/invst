@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import PrivyAuthProvider from "../components/privy-auth/PrivyProvider";
 import { OnchainkitProvider } from "../components/onchain-kit/OnchainKitProvider";
-// import { ChakraProvider, defaultSystem } from "@chakra-ui/react";
+
 import { Provider } from "../components/ui/provider";
 
 const geistSans = Geist({

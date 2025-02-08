@@ -20,22 +20,14 @@ export default function PrivyAuthProvider({
     <PrivyProvider
       appId={appId}
       config={{
-        // Customize Privy's appearance in your app
         appearance: {
           theme: "light",
           accentColor: "#676FFF",
-          logo: "https://your-logo-url",
+          logo: "/invst-logo.png",
         },
-        // fundingMethodConfig: {
-        //   moonpay: {
-        //     paymentMethod: "credit_debit_card", // Purchase with credit or debit card
-        //     uiConfig: { accentColor: "#696FFD", theme: "light" }, // Styling preferences for MoonPay's UIs
-        //   },
-        // },
-        // Create embedded wallets for users who don't have a wallet
         embeddedWallets: {
           ethereum: {
-            createOnLogin: "all-users", // Ensures wallets are created if the user doesn't have one
+            createOnLogin: "all-users",
           },
         },
         externalWallets: {

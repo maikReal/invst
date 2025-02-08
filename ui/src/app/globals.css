@@ -1,42 +1,27 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+/* Fund button on dashboard */
+.fundButtonCustom {
+  background-color: white !important; /* Blue */
+  color: #5a5956 !important;
+  border-radius: 8px !important;
+  padding: 12px 12px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+/* Ensure hover & active styles work */
+.fundButtonCustom:hover {
+  background-color: rgb(236, 236, 236) !important; /* Darker blue */
+}
+
+.fundButtonCustom:active {
+  background-color: rgb(236, 236, 236) !important;
 }
