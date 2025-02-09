@@ -1,7 +1,7 @@
 "use client";
 
 import { Flex, Heading } from "@chakra-ui/react";
-import { Button } from "../../components/ui/button";
+import { Button } from "@/components/ui/button";
 import { usePrivy } from "@privy-io/react-auth";
 import { useRouter } from "next/navigation";
 export default function AccountAuth() {

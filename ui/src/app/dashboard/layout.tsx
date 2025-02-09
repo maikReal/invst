@@ -7,6 +7,7 @@ export default function DashboardLayout({
 }) {
   return (
     <Flex
+      py={24}
       h={"100vh"}
       flexDir={"column"}
       justifyContent={"start"}

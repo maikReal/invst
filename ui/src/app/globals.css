@@ -1,9 +1,3 @@
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
 /* Fund button on dashboard */
 .fundButtonCustom {
   background-color: white !important; /* Blue */

@@ -4,11 +4,7 @@ import { usePrivy } from "@privy-io/react-auth";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { CustomFundButton } from "@/components/ui/coinbase/buy";
-import {
-  ClipboardButton,
-  ClipboardIconButton,
-  ClipboardRoot,
-} from "@/components/ui/clipboard";
+import { ClipboardIconButton, ClipboardRoot } from "@/components/ui/clipboard";
 import { useUsdcBalance } from "@/hooks/useBalance";
 
 export const AccountInfo = () => {
@@ -41,7 +37,6 @@ export const AccountInfo = () => {
     router.push("/auth");
   };
 
-  console.log(usdcBalance);
   return (
     <Flex flexDir={"column"} alignItems={"center"} gap={"1rem"}>
       <Heading size={"4xl"} fontWeight={"semibold"}>

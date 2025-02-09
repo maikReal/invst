@@ -1,6 +1,6 @@
 "use client";
 
-import { AccountInfo } from "@/components/layout/account-info";
-export default function Dashboard() {
-  return <AccountInfo />;
+import { Dashboard } from "@/components/layout/Dashboard";
+export default function DashboardPage() {
+  return <Dashboard />;
 }

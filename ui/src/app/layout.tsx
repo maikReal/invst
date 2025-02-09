@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import PrivyAuthProvider from "../components/privy-auth/PrivyProvider";
-import { OnchainkitProvider } from "../components/onchain-kit/OnchainKitProvider";
+import PrivyAuthProvider from "@/components/PrivyAuth/PrivyProvider";
+import { OnchainkitProvider } from "@/components/OnchainKit/OnchainKitProvider";
 
-import { Provider } from "../components/ui/provider";
+import { Provider } from "@/components/ui/provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
