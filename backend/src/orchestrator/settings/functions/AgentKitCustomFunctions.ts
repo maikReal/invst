@@ -48,7 +48,7 @@ export const createOrRetreiveWalletFunction = new GameFunction({
         method: "POST",
         body: JSON.stringify({
           workerId: "create_or_retreive_agent_wallet",
-          address: generatedWalletAddress,
+          agentResponse: { data: generatedWalletAddress },
         }),
       });
 
