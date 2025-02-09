@@ -176,3 +176,4 @@ dist
 .DS_Store
 
 .next
+.vercel
