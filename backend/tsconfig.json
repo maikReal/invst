@@ -12,6 +12,7 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
+    "types": ["bun"],
     "paths": {
       "api/*": ["api/*"],
       "src/*": ["src/*"]
