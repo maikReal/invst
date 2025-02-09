@@ -1,5 +1,4 @@
 import { Flex, Heading, Spinner } from "@chakra-ui/react";
-import { useEffect } from "react";
 import { usePrivy } from "@privy-io/react-auth";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -7,30 +6,11 @@ import { CustomFundButton } from "@/components/ui/coinbase/buy";
 import { ClipboardIconButton, ClipboardRoot } from "@/components/ui/clipboard";
 import { useUsdcBalance } from "@/hooks/useBalance";
 
-export const AccountInfo = () => {
-  const { user, authenticated, logout } = usePrivy();
-  const [address, setAddress] = useState<`0x${string}` | undefined>();
+export const AccountInfo = ({ address }: { address: `0x${string}` }) => {
+  const { logout } = usePrivy();
   const router = useRouter();
   const [brightness, setBrightness] = useState("100%");
   const { balance: usdcBalance } = useUsdcBalance(address);
-
-  useEffect(() => {
-    if (user) {
-      const walletAddress = user?.linkedAccounts.find(
-        (account) => account.type === "wallet"
-      );
-
-      user?.linkedAccounts.map((account) => {
-        console.log(account);
-      });
-      walletAddress?.address;
-      setAddress(walletAddress?.address as `0x${string}`);
-    }
-
-    if (user && !authenticated) {
-      router.push("/auth");
-    }
-  }, [user]);
 
   const handleLogout = async () => {
     await logout();

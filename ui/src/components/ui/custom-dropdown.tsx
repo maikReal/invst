@@ -14,7 +14,6 @@ interface CustomDropdownProps {
   selectLabel?: string;
   placeholder?: string;
   options: string[];
-  value: string;
   onChange: (value: string) => void;
 }
 
@@ -22,14 +21,13 @@ export const CustomDropdown = ({
   selectLabel,
   placeholder,
   options,
-  value,
   onChange,
 }: CustomDropdownProps) => {
   const data = createListCollection({
     items: options.map((option, index) => ({
       index,
       label: option,
-      value: value[index],
+      value: option,
     })),
   });
   return (

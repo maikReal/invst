@@ -4,7 +4,6 @@ interface StrategyCardProps {
   title: string;
   description: string;
   options: string[];
-  value: string;
   selectLabel?: string;
   placeholder?: string;
   onChange: (value: string) => void;
@@ -16,7 +15,6 @@ export const StrategyCard = ({
   title,
   description,
   options,
-  value,
   selectLabel,
   placeholder,
   onChange,
@@ -30,7 +28,6 @@ export const StrategyCard = ({
       <Card.Footer justifyContent="flex-start">
         <CustomDropdown
           options={options}
-          value={value}
           onChange={onChange}
           placeholder={placeholder}
           selectLabel={selectLabel}
