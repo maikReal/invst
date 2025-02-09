@@ -1,13 +1,35 @@
 {
-  "$schema": "https://turborepo.org/schema.json",
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": ["**/.env.*local"],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["ui/.next/**", "backend/dist/**"]
+      "outputs": [".next/**", "dist/**"],
+      "env": [
+        "CDP_API_KEY_NAME",
+        "CDP_API_KEY_PRIVATE_KEY",
+        "NEXT_PUBLIC_*",
+        "LIT_NETWORK_ID",
+        "WALLET_PROVIDER_NETWORK_ID",
+        "ONE_INCH_API_KEY",
+        "RPC_PROVIDER_URL",
+        "ETHEREUM_PRIVATE_KEY"
+      ]
     },
-    "start": {
-      "dependsOn": ["build"],
-      "cache": false
+    "lint": {},
+    "dev": {
+      "cache": false,
+      "persistent": true,
+      "env": [
+        "CDP_API_KEY_NAME",
+        "CDP_API_KEY_PRIVATE_KEY",
+        "NEXT_PUBLIC_*",
+        "LIT_NETWORK_ID",
+        "WALLET_PROVIDER_NETWORK_ID",
+        "ONE_INCH_API_KEY",
+        "RPC_PROVIDER_URL",
+        "ETHEREUM_PRIVATE_KEY"
+      ]
     }
   }
 }
