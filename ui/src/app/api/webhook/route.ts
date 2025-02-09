@@ -3,9 +3,6 @@ import { NextRequest, NextResponse } from "next/server";
 // Store agent responses: workerId -> walletAddress
 const pendingResponses = new Map<string, string>();
 
-/**
- * 📌 POST: Webhook receives agent response and stores the wallet address
- */
 export async function POST(req: NextRequest) {
   try {
     const { workerId, agentResponse } = await req.json();
@@ -24,6 +21,8 @@ export async function POST(req: NextRequest) {
     // Store response for later retrieval
     pendingResponses.set(workerId, agentResponse);
 
+    console.log("Webhook pendingResponses", pendingResponses);
+
     return NextResponse.json({
       success: true,
       message: "Wallet address stored",
@@ -37,12 +36,13 @@ export async function POST(req: NextRequest) {
   }
 }
 
-/**
- * 📌 GET: Retrieve wallet address for a given `workerId`
- */
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const workerId = searchParams.get("workerId");
+
+  console.log("Webhook GET", workerId);
+  console.log("Webhook pendingResponses", pendingResponses);
+  console.log("Webhook searchParams", searchParams);
 
   if (!workerId) {
     return NextResponse.json(

@@ -16,9 +16,12 @@ export const useAgentRequest = () => {
     setError(null);
 
     try {
-      const response = await axios.post("/api/agent/ask-request/" + workerId, {
-        task,
-      });
+      const response = await axios.post(
+        "http://localhost:4000/api/agent/ask-request/" + workerId,
+        {
+          task,
+        }
+      );
 
       if (response.data.success) {
         setWorkerId(workerId);

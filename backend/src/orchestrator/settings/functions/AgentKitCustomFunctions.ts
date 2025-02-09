@@ -47,7 +47,7 @@ export const createOrRetreiveWalletFunction = new GameFunction({
       const response = await fetch("http://localhost:3000/api/webhook", {
         method: "POST",
         body: JSON.stringify({
-          workerId: "create_or_retreive_agent_wallet",
+          workerId: "create_or_retreive_wallet",
           agentResponse: { data: generatedWalletAddress },
         }),
       });

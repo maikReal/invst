@@ -51,8 +51,9 @@ export class BalancerManager {
     }
         }
       }
-
     `;
+
+    console.log("🔹 Balancer GraphQL Query: ", query);
 
     const poolsInfo: { data: { poolGetPools: any[] } } =
       await this.balancerClient.request(query);
