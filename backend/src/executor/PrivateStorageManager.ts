@@ -1,12 +1,7 @@
 import * as LitJsSdk from "@lit-protocol/lit-node-client-nodejs";
 
 import { decryptToString, encryptString } from "@lit-protocol/encryption";
-import {
-  LIT_ABILITY,
-  LIT_NETWORK,
-  LIT_RPC,
-  LitAbility,
-} from "@lit-protocol/constants";
+import { LIT_ABILITY, LIT_NETWORK, LIT_RPC } from "@lit-protocol/constants";
 import dotenv from "dotenv";
 import { WalletData } from "@coinbase/coinbase-sdk";
 import DatabaseManager from "src/database/DatabaseManager";
@@ -26,7 +21,7 @@ export interface UserWalletData {
 }
 
 export class PrivateLitStorageService {
-  private chain: string = process.env.LIT_NETWORK_ID || "baseSepolia";
+  // private chain: string = process.env.LIT_NETWORK_ID || "baseSepolia";
   private litClient: LitJsSdk.LitNodeClientNodeJs;
   private isConnected: boolean = false;
   private ethersSigner: ethers.Wallet;
@@ -70,12 +65,12 @@ export class PrivateLitStorageService {
         {
           contractAddress: "",
           standardContractType: "",
-          chain: this.chain,
           method: "",
+          chain: "ethereum",
           parameters: [":userAddress"],
           returnValueTest: {
             comparator: "=",
-            value: userId,
+            value: this.ethersSigner.address,
           },
         },
       ];
@@ -83,7 +78,10 @@ export class PrivateLitStorageService {
       const encodedData = JSON.stringify({ userId, agentWallet, walletData });
 
       const { ciphertext, dataToEncryptHash } = await encryptString(
-        { dataToEncrypt: encodedData, accessControlConditions },
+        {
+          dataToEncrypt: encodedData,
+          accessControlConditions,
+        },
         this.litClient
       );
 
@@ -111,12 +109,12 @@ export class PrivateLitStorageService {
         {
           contractAddress: "",
           standardContractType: "",
-          chain: this.chain,
           method: "",
+          chain: "ethereum",
           parameters: [":userAddress"],
           returnValueTest: {
             comparator: "=",
-            value: userId,
+            value: this.ethersSigner.address,
           },
         },
       ];
@@ -134,16 +132,22 @@ export class PrivateLitStorageService {
         return null;
       }
 
+      console.log(`🔑 Data from DB, ciphertext:`, dbUserData.ciphertext);
+
+      console.log(`🔑 Data from DB, dataHash:`, dbUserData.dataHash);
+
       const decryptedData = await decryptToString(
         {
           ciphertext: dbUserData.ciphertext,
           dataToEncryptHash: dbUserData.dataHash,
-          chain: this.chain,
+          chain: "ethereum",
           accessControlConditions,
           sessionSigs,
         },
         this.litClient
       );
+
+      console.log(`🔑 Decrypted Data:`, decryptedData);
 
       const parsedData: UserWalletData = JSON.parse(decryptedData);
       return parsedData || null;
@@ -157,6 +161,7 @@ export class PrivateLitStorageService {
   }
 
   async getSessionSignatures() {
+    console.log("Address for sign: ", this.ethersSigner.address);
     const sessionSignatures = await this.litClient.getSessionSigs({
       chain: "ethereum",
       expiration: new Date(Date.now() + 1000 * 60 * 10).toISOString(), // 10 minutes

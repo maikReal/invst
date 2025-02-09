@@ -11,19 +11,16 @@ export const executeTaskByRequest = async (req: any, res: any) => {
   console.log("Input params: ", { workerId, task });
 
   try {
-    // const task = `Run the ${workerId} work with following input data: ${JSON.stringify(
-    //   { userHashedEmail }
-    // )}`;
-
     console.log("Worker task: ", task);
 
-    await agentInstance.executeTaskByWorkerId({
+    const result = await agentInstance.executeTaskByWorkerId({
       workerId,
       task,
     });
     res.json({
       success: true,
       message: `Task ${workerId} executed successfully`,
+      data: result,
     });
   } catch (error) {
     res.status(500).json({ error: `Error executing strategy: ${error}` });

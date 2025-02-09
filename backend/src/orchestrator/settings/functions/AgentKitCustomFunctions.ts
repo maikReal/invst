@@ -42,10 +42,27 @@ export const createOrRetreiveWalletFunction = new GameFunction({
 
       logger(`Agent wallet address: ${generatedWalletAddress}`);
 
-      return new ExecutableGameFunctionResponse(
-        ExecutableGameFunctionStatus.Done,
-        generatedWalletAddress
-      );
+      logger(`Sending info to UI`);
+
+      const response = await fetch("http://localhost:3000/api/webhook", {
+        method: "POST",
+        body: JSON.stringify({
+          workerId: "create_or_retreive_agent_wallet",
+          address: generatedWalletAddress,
+        }),
+      });
+
+      if (response.ok) {
+        return new ExecutableGameFunctionResponse(
+          ExecutableGameFunctionStatus.Done,
+          `Wallet address ${generatedWalletAddress} generated and information was sent to UI`
+        );
+      } else {
+        return new ExecutableGameFunctionResponse(
+          ExecutableGameFunctionStatus.Failed,
+          `Wallet was generated with address ${generatedWalletAddress}. But failed to send info to UI. Response: ${response.statusText}`
+        );
+      }
     } catch (e) {
       return new ExecutableGameFunctionResponse(
         ExecutableGameFunctionStatus.Failed,

@@ -27,11 +27,11 @@ class DatabaseManager {
 
     // Create Table for Wallet Data
     await this.db.exec(`
-      CREATE TABLE IF NOT EXISTS user_wallets (
+      CREATE TABLE IF NOT EXISTS userWallets (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        user_id TEXT UNIQUE NOT NULL,
+        userId TEXT UNIQUE NOT NULL,
         ciphertext TEXT NOT NULL,
-        data_hash TEXT NOT NULL
+        dataHash TEXT NOT NULL
       );
     `);
 
@@ -53,8 +53,8 @@ class DatabaseManager {
     dataHash: string
   ): Promise<void> {
     const stmt = await this.db
-      .prepare(`INSERT INTO user_wallets (user_id, ciphertext, data_hash) VALUES (?, ?, ?) 
-      ON CONFLICT(user_id) DO UPDATE SET ciphertext = ?, data_hash = ?`);
+      .prepare(`INSERT INTO userWallets (userId, ciphertext, dataHash) VALUES (?, ?, ?) 
+      ON CONFLICT(userId) DO UPDATE SET ciphertext = ?, dataHash = ?`);
 
     await stmt.run(userId, ciphertext, dataHash, ciphertext, dataHash);
     console.log(`✅ Stored wallet data for User: ${userId}`);
@@ -65,7 +65,7 @@ class DatabaseManager {
     userId: string
   ): Promise<{ ciphertext: string; dataHash: string } | null> {
     const stmt = await this.db.prepare(
-      "SELECT ciphertext, data_hash FROM user_wallets WHERE user_id = ?"
+      "SELECT ciphertext, dataHash FROM userWallets WHERE userId = ?"
     );
 
     const row = await stmt.get(userId);

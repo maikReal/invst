@@ -237,11 +237,15 @@ Your communication style reflects your precision, expertise, and accessibility:
     try {
       const worker = this.agent.getWorkerById(workerId);
       if (worker) {
-        await worker.runTask(task, {
+        const response = await worker.runTask(task, {
           verbose: true,
         });
 
-        console.log(`✅ Worker '${workerId}' executed successfully.`);
+        console.log(
+          `✅ Worker '${workerId}' executed successfully. Result ${response}`
+        );
+
+        return response;
       } else {
         console.log(`❌ Worker '${workerId}' ID is not found.`);
       }

@@ -17,13 +17,16 @@ export const executeTaskByWorkerId = async (req: any, res: any) => {
 
     console.log("Worker task: ", task);
 
-    await agentInstance.executeTaskByWorkerId({
+    const result = await agentInstance.executeTaskByWorkerId({
       workerId,
       task,
     });
+
+    console.log("Result: ", result);
     res.json({
       success: true,
       message: `Task ${workerId} executed successfully`,
+      data: result,
     });
   } catch (error) {
     res.status(500).json({ error: `Error executing strategy: ${error}` });

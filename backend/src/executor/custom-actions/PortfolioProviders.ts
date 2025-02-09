@@ -1,10 +1,6 @@
 import { customActionProvider, EvmWalletProvider } from "@coinbase/agentkit";
 import { z } from "zod";
 
-import { http } from "viem";
-import { createWalletClient } from "viem";
-import { privateKeyToAccount } from "viem/accounts";
-import { base } from "viem/chains";
 import { getPortfolio } from "src/tools/blockscout/portfolio";
 
 interface PortfolioInputTypes {
