@@ -1,12 +1,19 @@
 {
-  "projects": [
+  "version": 2,
+  "builds": [
     {
-      "name": "ui",
-      "root": "ui"
+      "src": "ui/package.json",
+      "use": "@vercel/next"
     },
     {
-      "name": "backend",
-      "root": "backend"
+      "src": "backend/api/server.ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/backend/api/server.ts"
     }
   ]
 }
