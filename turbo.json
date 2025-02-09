@@ -8,15 +8,11 @@
     },
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [".next/**", "dist/**"]
+      "outputs": ["ui/.next/**", "backend/dist/**"]
     },
     "start": {
       "dependsOn": ["build"],
       "cache": false
-    },
-    "lint": {
-      "dependsOn": ["^lint"],
-      "cache": true
     }
   }
 }
